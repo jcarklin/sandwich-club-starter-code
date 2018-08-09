@@ -14,15 +14,25 @@ import com.udacity.sandwichclub.utils.JsonUtils;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
-    private TextView originIv;
-    private TextView alsoKnownTv;
-    private TextView ingredientsTv;
-    private TextView descriptionTv;
+    @BindView(R.id.origin_tv)
+    TextView originIv;
+
+    @BindView(R.id.also_known_tv)
+    TextView alsoKnownTv;
+
+    @BindView(R.id.ingredients_tv)
+    TextView ingredientsTv;
+
+    @BindView(R.id.description_tv)
+    TextView descriptionTv;
 
     private  Sandwich selectedSandwich=null;
 
@@ -30,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        ButterKnife.bind(this);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
 
@@ -69,10 +80,6 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI() {
-        originIv = findViewById(R.id.origin_tv);
-        alsoKnownTv = findViewById(R.id.also_known_tv);
-        ingredientsTv = findViewById(R.id.ingredients_tv);
-        descriptionTv = findViewById(R.id.description_tv);
 
         if (isNullOrEmpty(selectedSandwich.getPlaceOfOrigin())) {
             ((ViewGroup)findViewById(R.id.origin_ll).getParent()).removeView(findViewById(R.id.origin_ll));
